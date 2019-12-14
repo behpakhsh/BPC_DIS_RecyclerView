@@ -11,28 +11,16 @@
             <enum name="grid" value="2" />
         </attr>
 
-        <attr name="goUpHeight" format="dimension">
-            <enum name="fill_parent" value="-1" />
-            <enum name="match_parent" value="-1" />
-            <enum name="wrap_content" value="-2" />
-        </attr>
-
-        <attr name="goUpWidth" format="dimension">
-            <enum name="fill_parent" value="-1" />
-            <enum name="match_parent" value="-1" />
-            <enum name="wrap_content" value="-2" />
+        <attr name="disOverScrollMode">
+            <enum name="always" value="0" />
+            <enum name="ifContentScrolls" value="1" />
+            <enum name="never" value="2" />
         </attr>
 
         <attr name="numberOfColumns" format="integer" />
 
         <attr name="dividerEnable" format="boolean" />
         <attr name="dividerSrc" format="reference|color" />
-
-        <attr name="goUpMargin" format="dimension" />
-        <attr name="goUpMarginTop" format="dimension" />
-        <attr name="goUpMarginBottom" format="dimension" />
-        <attr name="goUpMarginStart" format="dimension" />
-        <attr name="goUpMarginEnd" format="dimension" />
 
     </declare-styleable>
 </resources>

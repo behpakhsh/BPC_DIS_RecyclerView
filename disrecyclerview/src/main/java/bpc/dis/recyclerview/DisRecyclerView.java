@@ -76,23 +76,6 @@ public class DisRecyclerView extends FrameLayout {
         setGoUpImageResource(goUpSrc);
 
 
-        //handle Size
-
-        float goUpWidth = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpWidth, getResources().getDimension(R.dimen.goUpWidth));
-        float goUpHeight = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpHeight, getResources().getDimension(R.dimen.goUpHeight));
-//        setGoUpWidthAndHeight(goUpWidth, goUpHeight);
-
-
-        //handle Margin
-
-        float goUpMargin = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpMargin, 0);
-        float goUpMarginTop = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpMarginTop, 0);
-        float goUpMarginBottom = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpMarginBottom, 0);
-        float goUpMarginEnd = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpMarginEnd, 0);
-        float goUpMarginStart = styledAttributes.getDimension(R.styleable.DisRecyclerView_goUpMarginStart, 0);
-//        setGoUpMargin((int) goUpMargin, (int) goUpMarginTop, (int) goUpMarginBottom, (int) goUpMarginEnd, (int) goUpMarginStart);
-
-
         // handle tableOrientation
 
         int tableOrientation = styledAttributes.getInteger(R.styleable.DisRecyclerView_tableOrientation, DisTableOrientation.VERTICAL.getValue());
@@ -109,7 +92,19 @@ public class DisRecyclerView extends FrameLayout {
                 break;
         }
 
+
+        // handle overScrollMode
+
+        int overScrollMode = styledAttributes.getInteger(R.styleable.DisRecyclerView_disOverScrollMode, 0);
+        setOverScrollMode(overScrollMode);
+
+
         styledAttributes.recycle();
+    }
+
+
+    public void setOverScrollMode(int overScrollMode) {
+        mRecyclerView.setOverScrollMode(overScrollMode);
     }
 
     private void setDivider(Context context, int dividerSrc) {
