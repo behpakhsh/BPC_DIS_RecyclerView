@@ -2,25 +2,22 @@ package bpc.dis.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DisRecyclerView extends FrameLayout {
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView recyclerView;
     private AppCompatImageButton btnGoUp;
-    private DisBaseAdapter mAdapter;
+    private DisBaseAdapter disBaseAdapter;
 
     public DisRecyclerView(@NonNull Context context) {
         super(context);
@@ -37,19 +34,13 @@ public class DisRecyclerView extends FrameLayout {
         init(context, attrs, defStyleAttr, 0);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public DisRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, 0, 0);
-    }
 
     public void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         View view = inflate(context, R.layout.dis_recycler_view, this);
-        mRecyclerView = view.findViewById(R.id.custom_recycler_view);
+        recyclerView = view.findViewById(R.id.custom_recycler_view);
         btnGoUp = view.findViewById(R.id.btn_go_up);
         setupView(context, attrs);
     }
-
 
     private void setupView(Context context, AttributeSet attrs) {
         TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.DisRecyclerView);
@@ -104,14 +95,18 @@ public class DisRecyclerView extends FrameLayout {
 
 
     public void setOverScrollMode(int overScrollMode) {
-        mRecyclerView.setOverScrollMode(overScrollMode);
+        try {
+            recyclerView.setOverScrollMode(overScrollMode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setDivider(Context context, int dividerSrc) {
         if (dividerSrc == -1) {
-            mRecyclerView.addItemDecoration(new DisDividerItemDecoration(context));
+            recyclerView.addItemDecoration(new DisDividerItemDecoration(context));
         } else {
-            mRecyclerView.addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
+            recyclerView.addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
         }
     }
 
@@ -121,20 +116,20 @@ public class DisRecyclerView extends FrameLayout {
             btnGoUp.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mRecyclerView == null || mRecyclerView.getLayoutManager() == null) {
+                    if (recyclerView == null || recyclerView.getLayoutManager() == null) {
                         return;
                     }
-                    mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, new RecyclerView.State(), 0);
+                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, new RecyclerView.State(), 0);
                 }
             });
 
-            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                    if (mRecyclerView == null || mRecyclerView.getLayoutManager() == null) {
+                    if (DisRecyclerView.this.recyclerView == null || DisRecyclerView.this.recyclerView.getLayoutManager() == null) {
                         return;
                     }
-                    if (((LinearLayoutManager) mRecyclerView.getLayoutManager()).findFirstVisibleItemPosition() > 3) {
+                    if (((LinearLayoutManager) DisRecyclerView.this.recyclerView.getLayoutManager()).findFirstVisibleItemPosition() > 3) {
                         btnGoUp.setVisibility(VISIBLE);
                     } else {
                         btnGoUp.setVisibility(GONE);
@@ -144,80 +139,43 @@ public class DisRecyclerView extends FrameLayout {
         }
     }
 
-    /**
-     * @description can use this method for  orientation ---> vertical, horizontal and grid  for 2 numberOfColumns
-     */
     private void setTableOrientation(Context context, DisTableOrientation tableOrientation) {
         switch (tableOrientation) {
             case HORIZONTAL:
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
                 break;
             case VERTICAL:
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                 break;
             case GRID:
-                mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
                 break;
         }
     }
 
-    /**
-     * @param context context
-     * @description can use this method for  orientation ---> grid  for  any numberOfColumns
-     */
     private void setTableGrid(Context context, int numberOfColumns) {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
-    }
-
-    private int dpToPx(float dp) {
-        float density = getResources().getDisplayMetrics().density;
-        return Math.round(dp * density);
-    }
-
-    private void setGoUpMargin(int goUpMargin, int goUpMarginTop, int goUpMarginBottom, int goUpMarginEnd, int goUpMarginStart) {
-        if (goUpMargin != 0) {
-            goUpMarginTop = goUpMargin;
-            goUpMarginBottom = goUpMargin;
-            goUpMarginEnd = goUpMargin;
-            goUpMarginStart = goUpMargin;
-        }
-        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(goUpMarginEnd, goUpMarginTop, goUpMarginStart, goUpMarginBottom);
-        btnGoUp.setLayoutParams(layoutParams);
-    }
-
-    private void setGoUpMargin(int margin) {
-        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(margin, margin, margin, margin);
-        btnGoUp.setLayoutParams(layoutParams);
-    }
-
-    private void setGoUpWidthAndHeight(float goUpWidth, float goUpHeight) {
-        goUpWidth = dpToPx(goUpWidth);
-        goUpHeight = dpToPx(goUpHeight);
-
-        btnGoUp.getLayoutParams().width = (int) goUpWidth;
-        btnGoUp.getLayoutParams().height = (int) goUpHeight;
+        recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
     }
 
     private void setGoUpImageResource(int goUpSrc) {
         btnGoUp.setImageResource(goUpSrc);
     }
 
+
     public DisBaseAdapter getAdapter() {
-        return mAdapter;
+        return disBaseAdapter;
     }
 
     public void setAdapter(DisBaseAdapter adapter) {
         if (adapter == null) {
             return;
         }
-        mRecyclerView.setAdapter(adapter);
-        mAdapter = adapter;
+        recyclerView.setAdapter(adapter);
+        disBaseAdapter = adapter;
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
-        mRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         if (!(layoutManager instanceof GridLayoutManager)) {
             return;
         }
