@@ -161,6 +161,9 @@ public class DisRecyclerView extends FrameLayout {
         btnGoUp.setImageResource(goUpSrc);
     }
 
+    public void addOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
+        recyclerView.addOnScrollListener(onScrollListener);
+    }
 
     public DisBaseAdapter getAdapter() {
         return disBaseAdapter;
