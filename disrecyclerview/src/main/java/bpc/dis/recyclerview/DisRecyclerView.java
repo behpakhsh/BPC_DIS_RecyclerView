@@ -177,6 +177,14 @@ public class DisRecyclerView extends FrameLayout {
         disBaseAdapter = adapter;
     }
 
+    public int getItemDecorationCount() {
+        return recyclerView.getItemDecorationCount();
+    }
+
+    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
     public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
         recyclerView.setLayoutManager(layoutManager);
         if (!(layoutManager instanceof GridLayoutManager)) {
@@ -188,6 +196,10 @@ public class DisRecyclerView extends FrameLayout {
                 return 1;
             }
         });
+    }
+
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return recyclerView.getLayoutManager();
     }
 
 }
