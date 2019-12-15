@@ -52,7 +52,7 @@ public class DisRecyclerView extends FrameLayout {
         setGoUpEnable(goUpEnable);
 
 
-        //handle divider
+        //handle dis_divider
 
         boolean dividerEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_dividerEnable, false);
         if (dividerEnable) {
@@ -89,7 +89,6 @@ public class DisRecyclerView extends FrameLayout {
         int overScrollMode = styledAttributes.getInteger(R.styleable.DisRecyclerView_disOverScrollMode, 0);
         setOverScrollMode(overScrollMode);
 
-
         styledAttributes.recycle();
     }
 
@@ -104,9 +103,9 @@ public class DisRecyclerView extends FrameLayout {
 
     private void setDivider(Context context, int dividerSrc) {
         if (dividerSrc == -1) {
-            recyclerView.addItemDecoration(new DisDividerItemDecoration(context));
+            addItemDecoration(new DisDividerItemDecoration(context));
         } else {
-            recyclerView.addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
+            addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
         }
     }
 
@@ -185,6 +184,10 @@ public class DisRecyclerView extends FrameLayout {
         recyclerView.addItemDecoration(itemDecoration);
     }
 
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return recyclerView.getLayoutManager();
+    }
+
     public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
         recyclerView.setLayoutManager(layoutManager);
         if (!(layoutManager instanceof GridLayoutManager)) {
@@ -196,10 +199,6 @@ public class DisRecyclerView extends FrameLayout {
                 return 1;
             }
         });
-    }
-
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return recyclerView.getLayoutManager();
     }
 
 }

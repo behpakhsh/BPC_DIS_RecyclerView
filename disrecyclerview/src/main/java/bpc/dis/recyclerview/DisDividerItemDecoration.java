@@ -1,7 +1,6 @@
 package bpc.dis.recyclerview;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -15,9 +14,7 @@ public class DisDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable divider;
 
     public DisDividerItemDecoration(Context context) {
-        final TypedArray styledAttributes = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
-        divider = styledAttributes.getDrawable(0);
-        styledAttributes.recycle();
+        divider = ContextCompat.getDrawable(context, R.drawable.dis_divider);
     }
 
     public DisDividerItemDecoration(Context context, int resId) {
