@@ -89,6 +89,12 @@ public class DisRecyclerView extends FrameLayout {
         int overScrollMode = styledAttributes.getInteger(R.styleable.DisRecyclerView_disOverScrollMode, 0);
         setOverScrollMode(overScrollMode);
 
+
+        // handle overScrollMode
+
+        int layoutDirection = styledAttributes.getInteger(R.styleable.DisRecyclerView_disLayoutDirection, 0);
+        setLayoutDirection(layoutDirection);
+
         styledAttributes.recycle();
     }
 
@@ -101,7 +107,7 @@ public class DisRecyclerView extends FrameLayout {
         }
     }
 
-    private void setDivider(Context context, int dividerSrc) {
+    public void setDivider(Context context, int dividerSrc) {
         if (dividerSrc == -1) {
             addItemDecoration(new DisDividerItemDecoration(context));
         } else {
@@ -109,7 +115,7 @@ public class DisRecyclerView extends FrameLayout {
         }
     }
 
-    private void setGoUpEnable(boolean goUpEnable) {
+    public void setGoUpEnable(boolean goUpEnable) {
         btnGoUp.setVisibility(GONE);
         if (goUpEnable) {
             btnGoUp.setOnClickListener(new OnClickListener() {
@@ -138,7 +144,11 @@ public class DisRecyclerView extends FrameLayout {
         }
     }
 
-    private void setTableOrientation(Context context, DisTableOrientation tableOrientation) {
+    public void setGoUpVisibility(int goUpVisibility) {
+        btnGoUp.setVisibility(goUpVisibility);
+    }
+
+    public void setTableOrientation(Context context, DisTableOrientation tableOrientation) {
         switch (tableOrientation) {
             case HORIZONTAL:
                 recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -152,11 +162,11 @@ public class DisRecyclerView extends FrameLayout {
         }
     }
 
-    private void setTableGrid(Context context, int numberOfColumns) {
+    public void setTableGrid(Context context, int numberOfColumns) {
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
     }
 
-    private void setGoUpImageResource(int goUpSrc) {
+    public void setGoUpImageResource(int goUpSrc) {
         btnGoUp.setImageResource(goUpSrc);
     }
 
@@ -201,5 +211,8 @@ public class DisRecyclerView extends FrameLayout {
         });
     }
 
-}
+    public void setLayoutDirection(int layoutDirection) {
+        recyclerView.setLayoutDirection(layoutDirection);
+    }
 
+}

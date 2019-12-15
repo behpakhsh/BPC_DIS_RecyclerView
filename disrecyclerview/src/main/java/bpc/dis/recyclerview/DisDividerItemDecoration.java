@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DisDividerItemDecoration extends RecyclerView.ItemDecoration {
@@ -14,11 +13,11 @@ public class DisDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable divider;
 
     public DisDividerItemDecoration(Context context) {
-        divider = ContextCompat.getDrawable(context, R.drawable.dis_divider);
+        divider = context.getResources().getDrawable(R.drawable.dis_divider);
     }
 
     public DisDividerItemDecoration(Context context, int resId) {
-        divider = ContextCompat.getDrawable(context, resId);
+        divider = context.getResources().getDrawable(resId);
     }
 
     @Override

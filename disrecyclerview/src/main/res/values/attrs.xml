@@ -17,6 +17,13 @@
             <enum name="never" value="2" />
         </attr>
 
+        <attr name="disLayoutDirection">
+            <enum name="ltr" value="0" />
+            <enum name="rtl" value="1" />
+            <enum name="inherit" value="2" />
+            <enum name="locale" value="3" />
+        </attr>
+
         <attr name="numberOfColumns" format="integer" />
 
         <attr name="dividerEnable" format="boolean" />
