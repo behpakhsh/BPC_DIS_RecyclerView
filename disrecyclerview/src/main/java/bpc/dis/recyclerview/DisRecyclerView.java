@@ -56,7 +56,7 @@ public class DisRecyclerView extends FrameLayout {
 
         boolean dividerEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_dividerEnable, false);
         if (dividerEnable) {
-            int dividerSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_dividerSrc, -1);
+            int dividerSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_dividerSrc, R.drawable.dis_divider);
             setDivider(context, dividerSrc);
         }
 
@@ -108,11 +108,7 @@ public class DisRecyclerView extends FrameLayout {
     }
 
     public void setDivider(Context context, int dividerSrc) {
-        if (dividerSrc == -1) {
-            addItemDecoration(new DisDividerItemDecoration(context));
-        } else {
-            addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
-        }
+        addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
     }
 
     public void setGoUpEnable(boolean goUpEnable) {
