@@ -2,10 +2,10 @@
 <resources>
     <declare-styleable name="DisRecyclerView">
 
-        <attr name="goUpEnable" format="boolean" />
-        <attr name="goUpSrc" format="reference|color" />
+        <attr name="disGoUpEnable" format="boolean" />
+        <attr name="disGoUpSrc" format="reference|color" />
 
-        <attr name="tableOrientation">
+        <attr name="disTableOrientation">
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
             <enum name="grid" value="2" />
@@ -24,10 +24,10 @@
             <enum name="locale" value="3" />
         </attr>
 
-        <attr name="numberOfColumns" format="integer" />
+        <attr name="disNumberOfColumns" format="integer" />
 
-        <attr name="dividerEnable" format="boolean" />
-        <attr name="dividerSrc" format="reference|color" />
+        <attr name="disDividerEnable" format="boolean" />
+        <attr name="disDividerSrc" format="reference|color" />
 
     </declare-styleable>
 </resources>

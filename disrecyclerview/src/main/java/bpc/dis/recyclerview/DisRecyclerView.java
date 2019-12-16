@@ -48,28 +48,28 @@ public class DisRecyclerView extends FrameLayout {
 
         //handle GoUp Button
 
-        boolean goUpEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_goUpEnable, false);
+        boolean goUpEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_disGoUpEnable, false);
         setGoUpEnable(goUpEnable);
 
 
         //handle dis_divider
 
-        boolean dividerEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_dividerEnable, false);
+        boolean dividerEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_disDividerEnable, false);
         if (dividerEnable) {
-            int dividerSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_dividerSrc, R.drawable.dis_divider);
+            int dividerSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_disDividerSrc, R.drawable.dis_divider);
             setDivider(context, dividerSrc);
         }
 
 
         //handle Src
 
-        int goUpSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_goUpSrc, R.drawable.ic_go_up);
+        int goUpSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_disGoUpSrc, R.drawable.ic_go_up);
         setGoUpImageResource(goUpSrc);
 
 
         // handle tableOrientation
 
-        int tableOrientation = styledAttributes.getInteger(R.styleable.DisRecyclerView_tableOrientation, DisTableOrientation.VERTICAL.getValue());
+        int tableOrientation = styledAttributes.getInteger(R.styleable.DisRecyclerView_disTableOrientation, DisTableOrientation.VERTICAL.getValue());
         switch (tableOrientation) {
             case 0:
                 setTableOrientation(context, DisTableOrientation.HORIZONTAL);
@@ -78,7 +78,7 @@ public class DisRecyclerView extends FrameLayout {
                 setTableOrientation(context, DisTableOrientation.VERTICAL);
                 break;
             case 2:
-                int numberOfColumns = styledAttributes.getInteger(R.styleable.DisRecyclerView_numberOfColumns, 1);
+                int numberOfColumns = styledAttributes.getInteger(R.styleable.DisRecyclerView_disNumberOfColumns, 1);
                 setTableGrid(context, numberOfColumns);
                 break;
         }
