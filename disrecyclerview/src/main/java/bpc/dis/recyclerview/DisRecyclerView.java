@@ -101,8 +101,10 @@ public class DisRecyclerView extends FrameLayout {
         //handle disBottomSpace
 
         float disBottomSpace = styledAttributes.getInteger(R.styleable.DisRecyclerView_disBottomSpace, 0);
-        disBottomSpace = disBottomSpace / getResources().getDisplayMetrics().density;
-        recyclerView.addItemDecoration(new BottomSpaceItemDecoration((int) disBottomSpace));
+        if (disBottomSpace != 0) {
+            disBottomSpace = disBottomSpace / getResources().getDisplayMetrics().density;
+            recyclerView.addItemDecoration(new BottomSpaceItemDecoration((int) disBottomSpace));
+        }
 
         styledAttributes.recycle();
     }
