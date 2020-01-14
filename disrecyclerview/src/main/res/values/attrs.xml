@@ -25,6 +25,7 @@
         </attr>
 
         <attr name="disNumberOfColumns" format="integer" />
+        <attr name="disBottomSpace" format="dimension" />
 
         <attr name="disDividerEnable" format="boolean" />
         <attr name="disDividerSrc" format="reference|color" />

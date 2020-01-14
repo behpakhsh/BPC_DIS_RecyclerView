@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import bpc.dis.recyclerutilities.BottomSpaceItemDecoration.BottomSpaceItemDecoration;
+
 public class DisRecyclerView extends FrameLayout {
 
     private RecyclerView recyclerView;
@@ -94,6 +96,13 @@ public class DisRecyclerView extends FrameLayout {
 
         int layoutDirection = styledAttributes.getInteger(R.styleable.DisRecyclerView_disLayoutDirection, 0);
         setLayoutDirection(layoutDirection);
+
+
+        //handle disBottomSpace
+
+        float disBottomSpace = styledAttributes.getInteger(R.styleable.DisRecyclerView_disBottomSpace, 0);
+        disBottomSpace = disBottomSpace / getResources().getDisplayMetrics().density;
+        recyclerView.addItemDecoration(new BottomSpaceItemDecoration((int) disBottomSpace));
 
         styledAttributes.recycle();
     }
