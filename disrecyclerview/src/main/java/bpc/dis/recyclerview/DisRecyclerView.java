@@ -23,29 +23,34 @@ public class DisRecyclerView extends FrameLayout {
 
     public DisRecyclerView(@NonNull Context context) {
         super(context);
-        init(context, null, 0, 0);
+        init(null, 0, 0);
     }
 
     public DisRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0, 0);
+        init(attrs, 0, 0);
     }
 
     public DisRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr, 0);
+        init(attrs, defStyleAttr, 0);
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        disBaseAdapter = null;
+    }
 
-    public void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        View view = inflate(context, R.layout.dis_recycler_view, this);
+    public void init(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        View view = inflate(getContext(), R.layout.dis_recycler_view, this);
         recyclerView = view.findViewById(R.id.custom_recycler_view);
         btnGoUp = view.findViewById(R.id.btn_go_up);
-        setupView(context, attrs);
+        setupView(attrs);
     }
 
-    private void setupView(Context context, AttributeSet attrs) {
-        TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.DisRecyclerView);
+    private void setupView(AttributeSet attrs) {
+        TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.DisRecyclerView);
 
 
         //handle GoUp Button
@@ -59,7 +64,7 @@ public class DisRecyclerView extends FrameLayout {
         boolean dividerEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_disDividerEnable, false);
         if (dividerEnable) {
             int dividerSrc = styledAttributes.getResourceId(R.styleable.DisRecyclerView_disDividerSrc, R.drawable.dis_divider);
-            setDivider(context, dividerSrc);
+            setDivider(dividerSrc);
         }
 
 
@@ -74,14 +79,14 @@ public class DisRecyclerView extends FrameLayout {
         int tableOrientation = styledAttributes.getInteger(R.styleable.DisRecyclerView_disTableOrientation, DisTableOrientation.VERTICAL.getValue());
         switch (tableOrientation) {
             case 0:
-                setTableOrientation(context, DisTableOrientation.HORIZONTAL);
+                setTableOrientation(DisTableOrientation.HORIZONTAL);
                 break;
             case 1:
-                setTableOrientation(context, DisTableOrientation.VERTICAL);
+                setTableOrientation(DisTableOrientation.VERTICAL);
                 break;
             case 2:
                 int numberOfColumns = styledAttributes.getInteger(R.styleable.DisRecyclerView_disNumberOfColumns, 1);
-                setTableGrid(context, numberOfColumns);
+                setTableGrid(numberOfColumns);
                 break;
         }
 
@@ -113,13 +118,12 @@ public class DisRecyclerView extends FrameLayout {
     public void setOverScrollMode(int overScrollMode) {
         try {
             recyclerView.setOverScrollMode(overScrollMode);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
-    public void setDivider(Context context, int dividerSrc) {
-        addItemDecoration(new DisDividerItemDecoration(context, dividerSrc));
+    public void setDivider(int dividerSrc) {
+        addItemDecoration(new DisDividerItemDecoration(getContext(), dividerSrc));
     }
 
     public void setGoUpEnable(boolean goUpEnable) {
@@ -155,22 +159,22 @@ public class DisRecyclerView extends FrameLayout {
         btnGoUp.setVisibility(goUpVisibility);
     }
 
-    public void setTableOrientation(Context context, DisTableOrientation tableOrientation) {
+    public void setTableOrientation(DisTableOrientation tableOrientation) {
         switch (tableOrientation) {
             case HORIZONTAL:
-                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                 break;
             case VERTICAL:
-                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 break;
             case GRID:
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 break;
         }
     }
 
-    public void setTableGrid(Context context, int numberOfColumns) {
-        recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
+    public void setTableGrid(int numberOfColumns) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
     }
 
     public void setGoUpImageResource(int goUpSrc) {

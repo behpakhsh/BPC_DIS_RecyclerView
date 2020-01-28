@@ -11,13 +11,13 @@ import java.util.List;
 
 public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseViewHolder<T>> {
 
-    private int mViewCount = 0;
-    private List<T> mData;
-    private Context mContext;
+    private int viewCount = 0;
+    private List<T> data;
+    private Context context;
 
     protected DisBaseAdapter(Context context, List<T> data) {
-        mContext = context;
-        mData = data;
+        this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -31,8 +31,8 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
         if (position < 0) {
             return;
         }
-        if (position > 0 && position < mViewCount - 1 && position - 1 < mData.size()) {
-            holder.setData(mData.get(position - 1));
+        if (position > 0 && position < viewCount - 1 && position - 1 < data.size()) {
+            holder.setData(data.get(position - 1));
         }
     }
 
@@ -43,23 +43,29 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return data.size();
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        context = null;
     }
 
     public void add(T object) {
         if (object != null) {
-            mData.add(object);
-            int position = mViewCount - 1;
-            mViewCount++;
+            data.add(object);
+            int position = viewCount - 1;
+            viewCount++;
             notifyItemInserted(position);
         }
     }
 
     public void insert(T object, int itemPosition) {
-        int maxPosition = mViewCount - 1;
-        if (mData != null && itemPosition < maxPosition && object != null) {
-            mData.add(itemPosition, object);
-            mViewCount++;
+        int maxPosition = viewCount - 1;
+        if (data != null && itemPosition < maxPosition && object != null) {
+            data.add(itemPosition, object);
+            viewCount++;
             notifyItemInserted(itemPosition);
         }
     }
@@ -70,9 +76,9 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
         }
         int size = data.size();
         if (size > 0) {
-            mData.addAll(data);
-            int positionStart = mViewCount;
-            mViewCount += size;
+            this.data.addAll(data);
+            int positionStart = viewCount;
+            viewCount += size;
             notifyItemRangeInserted(positionStart, size);
         }
     }
@@ -82,48 +88,48 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
     }
 
     public void replace(T object, int itemPosition) {
-        if (mData != null && object != null) {
-            if (itemPosition < mData.size()) {
-                mData.set(itemPosition, object);
-                mViewCount++;
+        if (data != null && object != null) {
+            if (itemPosition < data.size()) {
+                data.set(itemPosition, object);
+                viewCount++;
                 notifyItemChanged(itemPosition);
             }
         }
     }
 
     public void remove(T object) {
-        if (object != null && !mData.contains(object)) {
+        if (object != null && !data.contains(object)) {
             return;
         }
-        int dataPosition = mData.indexOf(object);
+        int dataPosition = data.indexOf(object);
         remove(dataPosition);
     }
 
     private void remove(int itemPosition) {
-        if (itemPosition >= mData.size()) {
+        if (itemPosition >= data.size()) {
             throw new IllegalArgumentException("itemPosition is greater than data size");
         } else {
-            mData.remove(itemPosition);
+            data.remove(itemPosition);
             notifyItemRemoved(itemPosition);
-            mViewCount--;
+            viewCount--;
         }
     }
 
     public void clear() {
-        mData.clear();
+        data.clear();
         notifyDataSetChanged();
     }
 
     protected List<T> getData() {
-        return mData;
+        return data;
     }
 
     protected T getData(int position) {
-        return mData.get(position);
+        return data.get(position);
     }
 
     protected Context getContext() {
-        return mContext;
+        return context;
     }
 
     protected abstract DisBaseViewHolder<T> onCreateBaseViewHolder(ViewGroup parent, int viewType);
