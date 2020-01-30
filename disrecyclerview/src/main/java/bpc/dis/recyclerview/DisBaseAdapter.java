@@ -134,4 +134,8 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
 
     protected abstract DisBaseViewHolder<T> onCreateBaseViewHolder(ViewGroup parent, int viewType);
 
+    public int getCount() {
+        return viewCount;
+    }
+
 }

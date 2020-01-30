@@ -39,6 +39,8 @@ public class DisRecyclerView extends FrameLayout {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        recyclerView = null;
+        btnGoUp = null;
         disBaseAdapter = null;
     }
 
@@ -116,10 +118,10 @@ public class DisRecyclerView extends FrameLayout {
 
 
     public void setOverScrollMode(int overScrollMode) {
-        try {
-            recyclerView.setOverScrollMode(overScrollMode);
-        } catch (Exception ignored) {
+        if (recyclerView == null) {
+            return;
         }
+        recyclerView.setOverScrollMode(overScrollMode);
     }
 
     public void setDivider(int dividerSrc) {

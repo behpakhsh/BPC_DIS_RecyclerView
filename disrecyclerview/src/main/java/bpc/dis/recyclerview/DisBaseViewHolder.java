@@ -6,19 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class DisBaseViewHolder<T> extends RecyclerView.ViewHolder {
 
-    private T mData;
-
-    private View itemView;
+    private T data;
 
     public DisBaseViewHolder(View itemView) {
         super(itemView);
-        this.itemView = itemView;
         onInitializeView();
-
-    }
-
-    protected View getItemView() {
-        return itemView;
     }
 
     private void onInitializeView() {
@@ -26,14 +18,14 @@ public abstract class DisBaseViewHolder<T> extends RecyclerView.ViewHolder {
     }
 
     public T getData() {
-        return mData;
+        return data;
     }
 
     void setData(final T data) {
         if (data == null) {
             return;
         }
-        mData = data;
+        this.data = data;
     }
 
 }
