@@ -13,9 +13,11 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
 
     private int viewCount = 0;
     private List<T> data;
+    private Context context;
 
     protected DisBaseAdapter(Context context, List<T> data) {
         this.data = data;
+        this.context = context;
     }
 
     @NonNull
@@ -47,6 +49,10 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public void add(T object) {
