@@ -228,4 +228,8 @@ public class DisRecyclerView extends FrameLayout {
         recyclerView.setLayoutDirection(layoutDirection);
     }
 
+    public View getChildAt(int index) {
+        return recyclerView.getChildAt(index);
+    }
+
 }
