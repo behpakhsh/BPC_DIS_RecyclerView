@@ -232,4 +232,8 @@ public class DisRecyclerView extends FrameLayout {
         return (DisBaseViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
     }
 
+    public View getChildAt(int index) {
+        return recyclerView.getChildAt(index);
+    }
+
 }
