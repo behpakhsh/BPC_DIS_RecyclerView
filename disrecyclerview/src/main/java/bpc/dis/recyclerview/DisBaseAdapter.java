@@ -69,6 +69,11 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
         return getContext().getResources().getDimension(resId);
     }
 
+    @Override
+    public String getString(int resId) {
+        return getContext().getResources().getString(resId);
+    }
+
     public Context getContext() {
         return context;
     }

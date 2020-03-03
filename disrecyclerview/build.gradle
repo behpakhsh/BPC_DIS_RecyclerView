@@ -33,5 +33,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.github.behpakhsh:BPC_DIS_RecyclerUtilities:1.0.1'
-    implementation 'com.github.behpakhsh:BPC_DIS_Utilities:1.1.8'
+    implementation 'com.github.behpakhsh:BPC_DIS_Utilities:1.1.9'
 }
