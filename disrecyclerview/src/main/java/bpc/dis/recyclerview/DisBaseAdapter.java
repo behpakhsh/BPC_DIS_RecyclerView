@@ -1,6 +1,7 @@
 package bpc.dis.recyclerview;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseViewHolder<T>> {
+import bpc.dis.utilities.ResourceManager.ResourceManagerListener;
+
+public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseViewHolder<T>> implements ResourceManagerListener {
 
     private int viewCount = 0;
     private List<T> data;
@@ -49,6 +52,21 @@ public abstract class DisBaseAdapter<T> extends RecyclerView.Adapter<DisBaseView
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
+    }
+
+    @Override
+    public Drawable getDrawable(int resId) {
+        return getContext().getResources().getDrawable(resId);
+    }
+
+    @Override
+    public int getColor(int resId) {
+        return getContext().getResources().getColor(resId);
+    }
+
+    @Override
+    public float getDimension(int resId) {
+        return getContext().getResources().getDimension(resId);
     }
 
     public Context getContext() {
