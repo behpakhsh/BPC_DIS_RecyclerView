@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import bpc.dis.recyclerutilities.BottomSpaceItemDecoration.BottomSpaceItemDecoration;
+import bpc.dis.recyclerutilities.RecyclerItemClickListener.OnItemClickListener;
+import bpc.dis.recyclerutilities.RecyclerItemClickListener.RecyclerItemClickListener;
 
 public class DisRecyclerView extends FrameLayout {
 
@@ -234,6 +236,10 @@ public class DisRecyclerView extends FrameLayout {
 
     public View getChild(int index) {
         return recyclerView.getChildAt(index);
+    }
+
+    public void addItemClickListener(OnItemClickListener onItemClickListener) {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, onItemClickListener));
     }
 
 }
