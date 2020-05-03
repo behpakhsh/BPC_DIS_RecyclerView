@@ -246,4 +246,12 @@ public class DisRecyclerView extends FrameLayout {
         recyclerView.smoothScrollToPosition(position);
     }
 
+    public void scrollToPosition(int position) {
+        recyclerView.scrollToPosition(position);
+    }
+
+    public RecyclerView getParentRecyclerView() {
+        return recyclerView;
+    }
+
 }
