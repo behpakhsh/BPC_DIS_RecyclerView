@@ -242,4 +242,8 @@ public class DisRecyclerView extends FrameLayout {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, onItemClickListener));
     }
 
+    public void smoothScrollToPosition(int position) {
+        recyclerView.smoothScrollToPosition(position);
+    }
+
 }
