@@ -118,7 +118,7 @@ public class DisRecyclerView extends FrameLayout {
 
         //handle scrollBars
 
-        int scrollBar = styledAttributes.getInteger(R.styleable.DisRecyclerView_disScrollbars, 0);
+        int scrollBar = styledAttributes.getInteger(R.styleable.DisRecyclerView_disScrollbars, 2);
         setScrollBar(scrollBar);
 
         styledAttributes.recycle();
