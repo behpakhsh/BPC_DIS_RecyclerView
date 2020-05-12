@@ -11,6 +11,13 @@
             <enum name="grid" value="2" />
         </attr>
 
+        <attr name="disScrollbars">
+            <flag name="none" value="0x00000000" />
+            <flag name="horizontal" value="0x00000100" />
+            <flag name="vertical" value="0x00000200" />
+            <flag name="horizontalAndVertical" value="0x00000300" />
+        </attr>
+
         <attr name="disOverScrollMode">
             <enum name="always" value="0" />
             <enum name="ifContentScrolls" value="1" />

@@ -115,9 +115,31 @@ public class DisRecyclerView extends FrameLayout {
             recyclerView.addItemDecoration(new BottomSpaceItemDecoration((int) disBottomSpace));
         }
 
+
+        //handle scrollBars
+
+        int scrollBar = styledAttributes.getInteger(R.styleable.DisRecyclerView_disScrollbars, 0);
+        setScrollBar(scrollBar);
+
         styledAttributes.recycle();
     }
 
+
+    public void setScrollBar(int scrollBar) {
+        if (scrollBar == 0) {
+            recyclerView.setVerticalScrollBarEnabled(false);
+            recyclerView.setHorizontalScrollBarEnabled(false);
+        } else if (scrollBar == 1) {
+            recyclerView.setVerticalScrollBarEnabled(false);
+            recyclerView.setHorizontalScrollBarEnabled(true);
+        } else if (scrollBar == 2) {
+            recyclerView.setVerticalScrollBarEnabled(true);
+            recyclerView.setHorizontalScrollBarEnabled(false);
+        } else {
+            recyclerView.setVerticalScrollBarEnabled(true);
+            recyclerView.setHorizontalScrollBarEnabled(true);
+        }
+    }
 
     public void setOverScrollMode(int overScrollMode) {
         if (recyclerView == null) {
