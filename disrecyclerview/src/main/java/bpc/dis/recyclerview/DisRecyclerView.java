@@ -56,11 +56,7 @@ public class DisRecyclerView extends FrameLayout {
     private void setupView(AttributeSet attrs) {
         TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.DisRecyclerView);
 
-
-        //handle GoUp Button
-
-        boolean goUpEnable = styledAttributes.getBoolean(R.styleable.DisRecyclerView_disGoUpEnable, false);
-        setGoUpEnable(goUpEnable);
+        setGoUpEnable(styledAttributes.getBoolean(R.styleable.DisRecyclerView_disGoUpEnable, false));
 
 
         //handle dis_divider
@@ -219,6 +215,7 @@ public class DisRecyclerView extends FrameLayout {
         if (adapter == null) {
             return;
         }
+        btnGoUp.setVisibility(GONE);
         recyclerView.setAdapter(adapter);
         disBaseAdapter = adapter;
     }
