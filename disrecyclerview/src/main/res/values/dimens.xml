@@ -5,5 +5,6 @@
     <dimen name="goUpHeight">48dp</dimen>
     <dimen name="goUpMargin">10dp</dimen>
     <dimen name="size_1dp">1dp</dimen>
+    <dimen name="size_2dp">2dp</dimen>
 
 </resources>
