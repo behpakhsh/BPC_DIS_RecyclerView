@@ -227,7 +227,15 @@ public class DisRecyclerView extends FrameLayout {
                 ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
                 params.height = maxHeight;
                 recyclerView.setLayoutParams(params);
+            } else {
+                ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                recyclerView.setLayoutParams(params);
             }
+        } else {
+            ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            recyclerView.setLayoutParams(params);
         }
         btnGoUp.setVisibility(GONE);
         recyclerView.setAdapter(adapter);
