@@ -115,7 +115,7 @@ public class DisRecyclerView extends FrameLayout {
 
         //handle disBottomSpace
 
-        float disMaxHeight = styledAttributes.getInteger(R.styleable.DisRecyclerView_disMaxHeight, 0);
+        float disMaxHeight = styledAttributes.getDimension(R.styleable.DisRecyclerView_disMaxHeight, 0);
         if (disMaxHeight != 0) {
             maxHeight = (int) (disMaxHeight / getResources().getDisplayMetrics().density);
         }
