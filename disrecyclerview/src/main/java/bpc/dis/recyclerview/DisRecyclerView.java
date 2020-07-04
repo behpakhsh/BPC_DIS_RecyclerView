@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class DisRecyclerView extends FrameLayout {
     private RecyclerView recyclerView;
     private AppCompatImageButton btnGoUp;
     private DisBaseAdapter disBaseAdapter;
+    private int maxHeight = 0;
 
     public DisRecyclerView(@NonNull Context context) {
         super(context);
@@ -111,6 +113,12 @@ public class DisRecyclerView extends FrameLayout {
             recyclerView.addItemDecoration(new BottomSpaceItemDecoration((int) disBottomSpace));
         }
 
+        //handle disBottomSpace
+
+        float disMaxHeight = styledAttributes.getInteger(R.styleable.DisRecyclerView_disMaxHeight, 0);
+        if (disMaxHeight != 0) {
+            maxHeight = (int) (disMaxHeight / getResources().getDisplayMetrics().density);
+        }
 
         //handle scrollBars
 
@@ -119,7 +127,6 @@ public class DisRecyclerView extends FrameLayout {
 
         styledAttributes.recycle();
     }
-
 
     public void setScrollBar(int scrollBar) {
         if (scrollBar == 0) {
@@ -215,9 +222,33 @@ public class DisRecyclerView extends FrameLayout {
         if (adapter == null) {
             return;
         }
+        if (maxHeight != 0) {
+            if (getTotalHeightOfRecyclerView(adapter.getItemCount()) > maxHeight) {
+                ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                params.height = maxHeight;
+                recyclerView.setLayoutParams(params);
+            }
+        }
         btnGoUp.setVisibility(GONE);
         recyclerView.setAdapter(adapter);
         disBaseAdapter = adapter;
+    }
+
+    public int getTotalHeightOfRecyclerView(int count) {
+        int totalHeight = 0;
+        for (int i = 0; i < count; i++) {
+            View view = null;
+            try {
+                view = recyclerView.findViewHolderForAdapterPosition(i).itemView;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (view != null) {
+                view.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                totalHeight += view.getMeasuredHeight();
+            }
+        }
+        return totalHeight;
     }
 
     public int getItemDecorationCount() {

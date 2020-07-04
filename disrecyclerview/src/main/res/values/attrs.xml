@@ -4,6 +4,7 @@
 
         <attr name="disGoUpEnable" format="boolean" />
         <attr name="disGoUpSrc" format="reference|color" />
+        <attr name="disMaxHeight" format="dimension" />
 
         <attr name="disTableOrientation">
             <enum name="horizontal" value="0" />
