@@ -38,14 +38,6 @@ public class DisRecyclerView extends FrameLayout {
         init(attrs, defStyleAttr, 0);
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        recyclerView = null;
-        btnGoUp = null;
-        disBaseAdapter = null;
-    }
-
     public void init(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         View view = inflate(getContext(), R.layout.dis_recycler_view, this);
         recyclerView = view.findViewById(R.id.custom_recycler_view);
